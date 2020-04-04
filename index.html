@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<title>GPIO Control</title>
+
+<body>
+    <h2>Send message to Arduino</h2>
+    <button type="button" onclick="LEDOn()" style="background-color:green;">ON</button>
+    <button type="button" onclick="LEDOff()" style="background-color:red;">OFF</button>
+<input type="text" id="angles"></input>
+<button type="button" onclick="Send()">Send</button>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+    <script>
+        var socket = io.connect(); //load socket.io-client and connect to the host
+        function LEDOn() {
+            socket.emit("state", 1); //send button state to server
+        }
+        function LEDOff() {
+            socket.emit("state", 0); //send button state to server
+        }
+        function Send() {
+            const angles = document.querySelector("#angles").value;
+            console.log(angles);
+            socket.emit("msg", angles);
+        }
+    </script>
+
+</html>
+</body>
+
+</html>

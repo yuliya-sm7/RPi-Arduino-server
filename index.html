@@ -1,30 +1,38 @@
 <!DOCTYPE html>
-<html>
-<title>GPIO Control</title>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raspberry-Arduino</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
 
 <body>
-    <h2>Send message to Arduino</h2>
-    <button type="button" onclick="LEDOn()" style="background-color:green;">ON</button>
-    <button type="button" onclick="LEDOff()" style="background-color:red;">OFF</button>
-<input type="text" id="angles"></input>
-<button type="button" onclick="Send()">Send</button>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
-    <script>
-        var socket = io.connect(); //load socket.io-client and connect to the host
-        function LEDOn() {
-            socket.emit("state", 1); //send button state to server
-        }
-        function LEDOff() {
-            socket.emit("state", 0); //send button state to server
-        }
-        function Send() {
-            const angles = document.querySelector("#angles").value;
-            console.log(angles);
-            socket.emit("msg", angles);
-        }
-    </script>
+    <h1>3D-сканнер</h1>
+    <div class="custom-control custom-switch">
+        <input type="checkbox" class="custom-control-input" id="customSwitch1" onclick="LEDToggle(this)">
+        <label class="custom-control-label" for="customSwitch1">Светодиод</label>
+    </div>
+    <button type="button" class="btn btn-warning m-3" onclick="Init()">Выставить в 0</button>
 
-</html>
+
+    <input type="text" id="angles"></input>
+    <button type="button" onclick="Send()">Send</button>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+    <script src="script.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>

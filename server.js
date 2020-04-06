@@ -1,21 +1,21 @@
-var app = require('express')();
-var server = require('http').createServer(app);
-var io = require('socket.io').listen(server);
-var SerialPort = require("serialport");
+const app = require('express')();
+const server = require('http').createServer(app);
+const io = require('socket.io').listen(server);
+const SerialPort = require("serialport");
 
 //SERIAL
-var portName = '/dev/ttyACM0';
-var sp = new SerialPort(portName, {
-   baudRate: 115200,
-   dataBits: 8,
-   parity: 'none',
-   stopBits: 1,
-   flowControl: false
-}); // instantiate the serial port.
-sp.on("open", function () {
-     sp.write('123456\r');
-     console.log ("comm port ready");
-  });
+// const portName = '/dev/ttyACM0';
+// const sp = new SerialPort(portName, {
+//    baudRate: 115200,
+//    dataBits: 8,
+//    parity: 'none',
+//    stopBits: 1,
+//    flowControl: false
+// }); // instantiate the serial port.
+// sp.on("open", function () {
+//      sp.write('123456\r');
+//      console.log ("comm port ready");
+//   });
 
 //SERVER
 server.listen(8080);
@@ -31,3 +31,6 @@ io.sockets.on('connection', function (socket){
     sp.write(data);
     });
 });
+
+// CAMERA
+

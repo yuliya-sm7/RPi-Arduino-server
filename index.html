@@ -10,8 +10,8 @@
 </head>
 
 <body>
-    <h1>3D-сканнер</h1>
-    <div class="custom-control custom-switch">
+    <h1 class="m-3">3D-сканнер</h1>
+    <div class="custom-control custom-switch m-3">
         <input type="checkbox" class="custom-control-input" id="customSwitch1" onclick="LEDToggle(this)">
         <label class="custom-control-label" for="customSwitch1">Светодиод</label>
     </div>
@@ -21,8 +21,14 @@
     <input type="text" id="angles"></input>
     <button type="button" onclick="Send()">Send</button>
 
+    <footer class="page-footer fixed-bottom bg-dark text-light">
+        <div class="footer-copyright text-center py-3">Москва 2020
+            <a href="http://sm7.bmstu.ru/">Кафедра СМ7 МГТУ им. Н.Э. Баумана</a>
+        </div>
+    </footer>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
-    <script src="script.js"></script>
+    <script src="client.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"

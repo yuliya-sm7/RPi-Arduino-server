@@ -9,6 +9,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "express": "^4.17.1",
+    "livecam": "^0.2.0",
+    "serialport": "^8.0.7",
     "socket.io": "^2.3.0"
   }
 }

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raspberry-Arduino</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>Отладочная информация</h3>
+            </div>
+            <textarea id="info" cols="15" rows="1" min-rows='1' placeholder='logging info'></textarea>
+        </nav>
+
+        <div id="content">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+                    <button type="button" id="sidebarCollapse" class="navbar-btn">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    <h2 class="m-1">3D-сканнер</h2>
+                </div>
+            </nav>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm">
+                        <div class="custom-control custom-switch m-3">
+                            <input type="checkbox" class="custom-control-input" id="customSwitch1">
+                            <label class="custom-control-label" for="customSwitch1">COM-порт</label>
+                        </div>
+                        <div class="custom-control custom-switch m-3">
+                            <input type="checkbox" class="custom-control-input" id="customSwitch2">
+                            <label class="custom-control-label" for="customSwitch2">Камера</label>
+                        </div>
+                        <div class="custom-control custom-switch m-3">
+                            <input type="checkbox" class="custom-control-input" id="customSwitch3">
+                            <label class="custom-control-label" for="customSwitch3">Подсветка</label>
+                        </div>
+                        <div id='arduino' hidden>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col">
+                                        <button type='button' class="btn btn-warning m-3">Выставить в 0</button>
+                                    </div>
+                                    <div class="col">
+                                        <div class="value">0</div>
+                                        <input type="range" min="0" max="360" step="1" value="0" id='motor1'>
+                                    </div>
+                                    <div class="col">
+                                        <div class="value">0</div>
+                                        <input type="range" min="0" max="90" step="0.5" value="0" id='motor2'>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="col-sm">
+                <div><iframe src="http://192.168.1.102:8081" style="overflow:hidden;zoom:2;" frameborder="0"></div>
+            </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <footer class="page-footer fixed-bottom bg-dark text-light">
+        <div class="footer-copyright text-center py-2">Москва 2020
+            <a href="http://sm7.bmstu.ru/" class="text-warning stretched-link">Кафедра СМ7 МГТУ им. Н.Э. Баумана</a>
+        </div>
+    </footer>
+
+
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+        integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+        crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+        integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+        crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+                $(this).toggleClass('active');
+            });
+        });
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+    <script src="index.js"></script>
+</body>
+
+</html>

@@ -1,5 +1,5 @@
 const express = require("express");
-const app = require('express')();
+const app = express();
 const path = require('path');
 const server = require('http').createServer(app);
 const io = require('socket.io').listen(server);
@@ -32,15 +32,30 @@ sp.on('close', function () {
 
 
 //SERVER
-server.listen(8080);
+const port = 8080;
+server.listen(port);
 app.get('/', function (req, res) {
   res.sendFile(__dirname + '/public/index.html');
 });
 
 
+// CAMERA
+const IP = '192.168.1.102';
+const LiveCam = require('livecam');
+const webcam_server = new LiveCam({
+  'ui_addr': IP,
+  'ui_port': port+1,
+  'broadcast_addr': IP,
+  'broadcast_port': 12000,
+  'start': function () {
+    console.log('WebCam server started!');
+  }
+});
+webcam_server.broadcast();
+
+
 // WEBSOCKET
 io.sockets.on('connection', function (socket) {
-  socket.emit('test', { test: 'Its Working' });
   socket.on('serial', function (turn) {
     if (turn == true) {
       sp.open();
@@ -49,23 +64,15 @@ io.sockets.on('connection', function (socket) {
     }
     socket.emit('log', "port " + portName + (turn?' is open':' is close'));
   });
+  socket.on('livecam', function (turn) {
+    if (turn == true) {
+    } else {
+    }
+    socket.emit('log', "livecam on " + IP + ":" + port + (turn?' is open':' is close'));
+  });
   socket.on('command', function (msg) {
     console.log(msg);
     // sp.write(msg);
     socket.emit('log', msg);
   });
 });
-
-
-// CAMERA
-// const LiveCam = require('livecam');
-// const webcam_server = new LiveCam({
-//   'ui_addr': '192.168.1.102',
-//   'ui_port': 8081,
-//   'broadcast_addr': '192.168.1.102',
-//   'broadcast_port': 12000,
-//   'start': function () {
-//     console.log('WebCam server started!');
-//   }
-// });
-// webcam_server.broadcast();

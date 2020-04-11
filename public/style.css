@@ -1,11 +1,15 @@
-
+#video {
+    width: 100%;
+    height: auto;
+    box-shadow: 0px 0px 20px 10px rgba(239,250,27,1);
+}
 textarea{  
   display: block;
   box-sizing: padding-box;
-  overflow: hidden;
-
   padding: 10px;
-  width: 250px;
+  width: 100%;
+  height: 50%;
+  resize: none;
   font-size: 14px;
   margin: 20px auto;
   border-radius: 6px;
@@ -25,25 +29,16 @@ body {
 }
 .value {
   font-family: "Dosis", Helvetica, Arial, sans-serif;
-  border-bottom: 4px dashed #bdc3c7;
   text-align: center;
   font-weight: bold;
-  font-size: 5em;
-  width: 300px;
-  height: 100px;
-  line-height: 60px;
-  margin: 40px auto;
-  letter-spacing: -0.07em;
+  font-size: 2em;
   text-shadow: white 2px 2px 2px;
 }
 input[type="range"] {
-  display: block;
+  width: max-content;
   -webkit-appearance: none;
   background-color: #bdc3c7;
-  width: 300px;
-  height: 5px;
   border-radius: 5px;
-  margin: 0 auto;
   outline: 0;
 }
 input[type="range"]::-webkit-slider-thumb {
@@ -58,7 +53,7 @@ input[type="range"]::-webkit-slider-thumb {
 }
 ​ input[type="range"]::-webkit-slider-thumb:hover {
   background-color: white;
-  border: 2px solid #e74c3c;
+  border: 1px solid #e74c3c;
 }
 input[type="range"]::-webkit-slider-thumb:active {
   transform: scale(1.6);
@@ -126,7 +121,7 @@ a, a:hover, a:focus {
 #sidebar {
     min-width: 250px;
     max-width: 250px;
-    background: #7386D5;
+    background: rgb(42, 57, 116);
     color: #fff;
     transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
     transform-origin: bottom left;

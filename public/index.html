@@ -16,7 +16,8 @@
             <div class="sidebar-header">
                 <h3>Отладочная информация</h3>
             </div>
-            <textarea id="info" cols="15" rows="1" min-rows='1' placeholder='logging info'></textarea>
+            <textarea readonly id="info" cols="15" placeholder='logging info'></textarea>
+            <button type='button' id='clean' class="btn btn-secondary m-2">Очистить</button>
         </nav>
 
         <div id="content">
@@ -31,14 +32,12 @@
                 </div>
             </nav>
 
-            <div id="livecam"></div>
-
             <div class="container">
                 <div class="row">
-                    <div class="col-sm">
+                    <div class="col-5">
                         <div class="custom-control custom-switch m-3">
                             <input type="checkbox" class="custom-control-input" id="customSwitch1">
-                            <label class="custom-control-label" for="customSwitch1">COM-порт</label>
+                            <label class="custom-control-label" for="customSwitch1">Arduino</label>
                         </div>
                         <div class="custom-control custom-switch m-3">
                             <input type="checkbox" class="custom-control-input" id="customSwitch2">
@@ -48,27 +47,33 @@
                             <input type="checkbox" class="custom-control-input" id="customSwitch3">
                             <label class="custom-control-label" for="customSwitch3">Подсветка</label>
                         </div>
-                        <div id='arduino' hidden>
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col">
-                                        <button type='button' class="btn btn-warning m-3">Выставить в 0</button>
-                                    </div>
-                                    <div class="col">
-                                        <div class="value">0</div>
-                                        <input type="range" min="0" max="360" step="1" value="0" id='motor1'>
-                                    </div>
-                                    <div class="col">
-                                        <div class="value">0</div>
-                                        <input type="range" min="0" max="90" step="0.5" value="0" id='motor2'>
-                                    </div>
+                        <select>
+                            <option>Спираль</option>
+                            <option>Концентричные дуги</option>
+                            <option>Полусферы</option>
+                        </select>
+                        <button type='button' class="btn btn-primary m-3">Начать сканирование</button>
+                        <div>
+                            <hr>
+                            <h5>Ручная установка</h5>
+                            <button type='button' class="btn btn-primary m-3">Выставить в 0</button>
+                            <div>
+                                <div>
+                                    <label class='value' for='motor1'>0</label>
+                                    <input type="range" min="0" max="360" step="1" value="0" id='motor1'>
+                                </div>
+                                <div>
+                                    <label class='value' for='motor2'>0</label>
+                                    <input type="range" min="0" max="90" step="0.5" value="0" id='motor2'>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div class='col' id="livecam"><img id="video" src="#" /></div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
 

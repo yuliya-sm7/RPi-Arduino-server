@@ -41,18 +41,8 @@ app.get('/', function (req, res) {
 
 // CAMERA
 const IP = '192.168.1.102';
-const LiveCam = require('livecam');
-const webcam_server = new LiveCam({
-  'ui_addr': IP,
-  'ui_port': port+1,
-  'broadcast_addr': IP,
-  'broadcast_port': 12000,
-  'start': function () {
-    console.log('WebCam server started!');
-  }
-});
-webcam_server.broadcast();
-
+const LiveCam = require('./livecam2.js');
+let webcam_server = undefined;
 
 // WEBSOCKET
 io.sockets.on('connection', function (socket) {
@@ -66,7 +56,18 @@ io.sockets.on('connection', function (socket) {
   });
   socket.on('livecam', function (turn) {
     if (turn == true) {
+      webcam_server = new LiveCam({
+        'ui_addr': IP,
+        'ui_port': port+1,
+        'broadcast_addr': IP,
+        'broadcast_port': 12000,
+        'start': function () {
+          console.log('WebCam server started!');
+        }
+      });
+      webcam_server.broadcast();
     } else {
+      
     }
     socket.emit('log', "livecam on " + IP + ":" + port + (turn?' is open':' is close'));
   });

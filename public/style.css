@@ -1,8 +1,12 @@
 #video {
     width: 100%;
     height: auto;
+}
+
+.light{
     box-shadow: 0px 0px 20px 10px rgba(239,250,27,1);
 }
+
 textarea{  
   display: block;
   box-sizing: padding-box;

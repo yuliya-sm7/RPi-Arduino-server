@@ -47,16 +47,17 @@
                             <input type="checkbox" class="custom-control-input" id="customSwitch3">
                             <label class="custom-control-label" for="customSwitch3">Подсветка</label>
                         </div>
-                        <select>
+                        <select class="custom-select">
                             <option>Спираль</option>
                             <option>Концентричные дуги</option>
                             <option>Полусферы</option>
                         </select>
-                        <button type='button' class="btn btn-primary m-3">Начать сканирование</button>
+                        <button type='button' id='scan' class="btn btn-primary m-3">Начать</button>
+                        <label id='photo_count' class='value'>0</label>
                         <div>
                             <hr>
                             <h5>Ручная установка</h5>
-                            <button type='button' class="btn btn-primary m-3">Выставить в 0</button>
+                            <button type='button' class=" btn btn-primary m-3">Выставить в 0</button>
                             <div>
                                 <div>
                                     <label class='value' for='motor1'>0</label>

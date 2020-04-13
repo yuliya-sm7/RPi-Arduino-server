@@ -37,7 +37,12 @@ server.listen(port);
 app.get('/', function (req, res) {
   res.sendFile(__dirname + '/public/index.html');
 });
-
+app.get('/gallery', function (req, res) {
+  res.sendFile(__dirname + '/public/gallery.html');
+});
+app.get('/obj', function (req, res) {
+  res.sendFile(__dirname + '/public/obj/obj.html');
+});
 
 // CAMERA
 const IP = '192.168.1.102';

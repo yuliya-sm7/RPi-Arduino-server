@@ -4,7 +4,8 @@ const path = require('path');
 const server = require('http').createServer(app);
 const io = require('socket.io').listen(server);
 const SerialPort = require("serialport");
-app.use(express.static(path.join(__dirname, 'public')));
+const fs = require('fs');
+
 
 // SERIAL
 const portName = '/dev/ttyACM0';
@@ -34,14 +35,11 @@ sp.on('close', function () {
 //SERVER
 const port = 8080;
 server.listen(port);
-app.get('/', function (req, res) {
-  res.sendFile(__dirname + '/public/index.html');
-});
-app.get('/gallery', function (req, res) {
-  res.sendFile(__dirname + '/public/gallery.html');
-});
-app.get('/obj', function (req, res) {
-  res.sendFile(__dirname + '/public/obj/obj.html');
+app.use(express.static(path.join(__dirname, 'public')));
+app.get('/list_photos', function (req, res) {
+  fs.readdir('./public/gallery/photo', function (err, items) {
+    res.json({ list: items });
+  });
 });
 
 // CAMERA
@@ -57,13 +55,13 @@ io.sockets.on('connection', function (socket) {
     } else {
       sp.close();
     }
-    socket.emit('log', "port " + portName + (turn?' is open':' is close'));
+    socket.emit('log', "port " + portName + (turn ? ' is open' : ' is close'));
   });
   socket.on('livecam', function (turn) {
     if (turn == true) {
       webcam_server = new LiveCam({
         'ui_addr': IP,
-        'ui_port': port+1,
+        'ui_port': port + 1,
         'broadcast_addr': IP,
         'broadcast_port': 12000,
         'start': function () {
@@ -72,9 +70,9 @@ io.sockets.on('connection', function (socket) {
       });
       webcam_server.broadcast();
     } else {
-      
+
     }
-    socket.emit('log', "livecam on " + IP + ":" + port + (turn?' is open':' is close'));
+    socket.emit('log', "livecam on " + IP + ":" + port + (turn ? ' is open' : ' is close'));
   });
   socket.on('command', function (msg) {
     console.log(msg);

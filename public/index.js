@@ -11,6 +11,7 @@ turn.addEventListener('click', (e) => {
 let scaning = false;
 let photo_counter = null;
 const photo_count = document.getElementById('photo_count');
+photo_count.addEventListener('click', ()=>{window.location='/gallery/'});
 const scan = document.getElementById('scan');
 scan.addEventListener('click', () => {
   scan.classList.toggle('btn-outline-primary');

@@ -8,23 +8,26 @@ turn.addEventListener('click', (e) => {
   socket.emit("serial", e.target.checked); //send button state to server
 });
 
-let scaning = false;
-let photo_counter = null;
+
 const photo_count = document.getElementById('photo_count');
+socket.on('photo_count', function(c){
+  photo_count.innerHTML = c;
+});
+
+let scaning = false;
 photo_count.addEventListener('click', ()=>{window.location='/gallery/'});
 const scan = document.getElementById('scan');
 scan.addEventListener('click', () => {
   scan.classList.toggle('btn-outline-primary');
   scan.classList.toggle('btn-primary');
   if (scaning) {
-    scan.innerText = "Начать";
-    clearInterval(photo_counter);
+    scan.innerText = "Начать сканирование";
   } else {
-    scan.innerText = "Закончить";
+    scan.innerText = "Закончить сканирование";
     photo_count.innerHTML = 0;
-    photo_counter = setInterval(function () { photo_count.innerHTML = parseInt(photo_count.innerHTML) + 1 }, 2000);
   }
   scaning = !scaning;
+  socket.emit("scanning", scaning);
 });
 
 const camera = document.getElementById('customSwitch2');

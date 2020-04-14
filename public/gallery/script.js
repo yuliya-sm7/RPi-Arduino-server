@@ -4,7 +4,6 @@
   if (response.ok) { // если HTTP-статус в диапазоне 200-299
     // получаем тело ответа (см. про этот метод ниже)
     const json = await response.json();
-    alert(json.list);
     const gallery = document.getElementsByClassName('gallery')[0];
     json.list.forEach(element => {
       const item = document.createElement('div');

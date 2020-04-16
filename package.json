@@ -13,6 +13,8 @@
     "express": "^4.17.1",
     "serialport": "^8.0.7",
     "socket.io": "^2.3.0",
-    "utf-8-validate": "^5.0.2"
+    "dicer": "^0.2.5",
+    "utf-8-validate": "^5.0.2",
+    "livecam": "^0.2.0"
   }
 }

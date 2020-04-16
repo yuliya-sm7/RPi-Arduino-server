@@ -297,6 +297,76 @@ function SocketCamWrapper(
 }
 
 /*!
+ * @class LiveCamUI
+ * @brief serves a minimal UI to view the webcam broadcast.
+ */
+function LiveCamUI() {
+	
+	const Http = require('http');
+	const Assert = require('assert');
+	const template = (function(){/*
+	<!doctype html>
+	<html lang="en">
+		<head>
+			<meta charset="utf-8">
+			<title>livecam UI</title>
+			<script type="text/javascript" src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+			<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+			<style type="text/css">html,body,.feed,.feed img{width:100%;height:100%;overflow:hidden;}</style>
+		</head>
+		<body>
+			<div class="feed"><img id="video" src="" /></div>
+			<script>
+				var webcam_addr = "@WEBCAM_ADDR@";
+				var webcam_port = "@WEBCAM_PORT@";
+				var webcam_host = $(".feed img");
+				var socket = io.connect('http://' + webcam_addr + ':' + webcam_port);
+				
+				socket.on('image', function (data) {
+					webcam_host.attr("src", "data:image/jpeg;base64," + data );
+				});
+			</script>
+		</body>
+	</html>
+	*/}).toString().match(/\/\*\s*([\s\S]*?)\s*\*\//m)[1];
+	
+	var server = undefined;
+	
+	var serve = function(ui_addr, ui_port, webcam_addr, webcam_port) {
+		Assert.ok(typeof(ui_addr), 'object');
+		Assert.ok(typeof(ui_port), 'number');
+		Assert.ok(typeof(webcam_addr), 'object');
+		Assert.ok(typeof(webcam_port), 'number');
+		
+		close();
+		server = Http.createServer(function(request, response) {
+			response.writeHead(200, {"Content-Type": "text/html"});
+			response.write(template
+				.replace('@WEBCAM_ADDR@', webcam_addr)
+				.replace('@WEBCAM_PORT@', webcam_port));
+			response.end();
+		});
+		server.listen(ui_port, ui_addr);
+		
+		console.log('Open http://' + ui_addr + ':' + ui_port + '/ in your browser!');
+	}
+	
+	var close = function() {
+		if (server) {
+			server.close();
+			server = undefined;
+		}
+	}
+	
+	return {
+		'serve' : serve,
+		'close' : close
+	}
+	
+}
+
+/*!
  * @class LiveCam
  * @brief starts a livecam server at given config params
  * @note config can have the following options:
@@ -324,6 +394,8 @@ function LiveCam(config) {
 	
 	const gst_tcp_addr = config.gst_addr || "127.0.0.1";
 	const gst_tcp_port = config.gst_port || 10000;
+	const ui_addr = config.ui_addr || "127.0.0.1";
+	const ui_port = config.ui_port || 11000;
 	const broadcast_addr = config.broadcast_addr || "127.0.0.1";
 	const broadcast_port = config.broadcast_port || 12000;
 	const start = config.start;
@@ -332,6 +404,8 @@ function LiveCam(config) {
 	if (start) Assert.ok(typeof(start), 'function');
 	if (broadcast_port) Assert.ok(typeof(broadcast_port), 'number');
 	if (broadcast_addr) Assert.ok(typeof(broadcast_addr), 'string');
+	if (ui_port) Assert.ok(typeof(ui_port), 'number');
+	if (ui_addr) Assert.ok(typeof(ui_addr), 'string');
 	if (gst_tcp_port) Assert.ok(typeof(gst_tcp_port), 'number');
 	if (gst_tcp_addr) Assert.ok(typeof(gst_tcp_addr), 'string');
 	if (webcam) Assert.ok(typeof(webcam), 'object');
@@ -350,11 +424,14 @@ function LiveCam(config) {
 	console.log("LiveCam parameters:", {
 		'broadcast_addr' : broadcast_addr,
 		'broadcast_port' : broadcast_port,
+		'ui_addr' : ui_addr,
+		'ui_port' : ui_port,
 		'gst_tcp_addr' : gst_tcp_addr,
 		'gst_tcp_port' : gst_tcp_port
 	});
 	
 	var broadcast = function() {
+		var gst_cam_ui = new LiveCamUI();
 		var gst_cam_wrap = new SocketCamWrapper();
 		var gst_cam_server = new GstLiveCamServer(webcam);
 		var gst_cam_process = gst_cam_server.start(gst_tcp_addr, gst_tcp_port);
@@ -364,10 +441,16 @@ function LiveCam(config) {
 			// This catches GStreamer when pipeline goes into PLAYING state
 			if(data.toString().includes('Setting pipeline to PLAYING') > 0) {
 				gst_cam_wrap.wrap(gst_tcp_addr, gst_tcp_port, broadcast_addr, broadcast_port);
+				gst_cam_ui.serve(ui_addr, ui_port, broadcast_addr, broadcast_port);
+				gst_cam_ui.close();
 				
 				if (start) start();
 			}
 		});
+
+		gst_cam_process.stderr.on('data', function(data) { console.log(data.toString()); gst_cam_ui.close(); });
+		gst_cam_process.on('error', function(err) { console.log("Webcam server error: " + err); gst_cam_ui.close(); });
+		gst_cam_process.on('exit', function(code) { console.log("Webcam server exited: " + code); gst_cam_ui.close(); });
 	}
 	
 	return {

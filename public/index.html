@@ -8,16 +8,28 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="slider.css">
 </head>
 
 <body>
     <div class="wrapper">
         <nav id="sidebar">
             <div class="sidebar-header">
-                <h3>Отладочная информация</h3>
+                <h4>Отладочная информация</h4>
             </div>
             <textarea readonly id="info" cols="15" placeholder='logging info'></textarea>
             <button type='button' id='clean' class="btn btn-secondary m-2">Очистить</button>
+            <button type='button' class=" btn btn-primary m-2">Выставить в 0</button>
+            <div>
+                <div class="range-slider m-1">
+                    <input id='motor1' class="range-slider__range" type="range" value="0" min="0" max="360">
+                    <span class="range-slider__value">0</span>
+                </div>
+                <div class="range-slider m-1">
+                    <input id='motor2' class="range-slider__range" type="range" value="0" min="0" max="90" step="0.5">
+                    <span class="range-slider__value">0</span>
+                </div>
+            </div>
         </nav>
 
         <div id="content">
@@ -54,29 +66,17 @@
                         </select>
                         <button type='button' id='scan' class="btn btn-primary m-3">Начать сканирование</button>
                         <label id='photo_count' class='value'>0</label>
-                        <div>
-                            <hr>
-                            <h5>Ручная установка</h5>
-                            <button type='button' class=" btn btn-primary m-3">Выставить в 0</button>
-                            <div>
-                                <div>
-                                    <label class='value' for='motor1'>0</label>
-                                    <input type="range" min="0" max="360" step="1" value="0" id='motor1'>
-                                </div>
-                                <div>
-                                    <label class='value' for='motor2'>0</label>
-                                    <input type="range" min="0" max="90" step="0.5" value="0" id='motor2'>
-                                </div>
-                            </div>
-                        </div>
                     </div>
-                    <div class='col' id="livecam"><img id="video" src="#" /></div>
+                    <div class='col'>
+                        <div id="livecam"><img id="video" src="#" /></div>
+                        <div id='model'></div>
+                        <span id="xyz">0</span>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     </div>
-
 
 
     <footer class="page-footer fixed-bottom bg-dark text-light">
@@ -110,6 +110,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
     <script src="index.js"></script>
+    <script type="module" src="simple/app.js"></script>
 
 </body>
 

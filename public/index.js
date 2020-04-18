@@ -67,10 +67,9 @@ motor2.addEventListener('change', (e) => {
 });
 
 
-document.getElementById('clean').addEventListener('click', () => { document.getElementById('info').value = "" })
-
+const info = document.getElementById('info');
 socket.on('log', function (msg) {
-  const info = document.getElementById('info');
   info.value += msg + '\n';
   info.scrollTop = info.scrollHeight;
 });
+document.getElementById('clean').addEventListener('click', () => { document.getElementById('info').value = "" })

@@ -7,14 +7,17 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
+  "type": "module",
   "license": "ISC",
   "dependencies": {
     "bufferutil": "^4.0.1",
-    "express": "^4.17.1",
-    "serialport": "^8.0.7",
-    "socket.io": "^2.3.0",
     "dicer": "^0.2.5",
+    "express": "^4.17.1",
+    "livecam": "^0.2.0",
+    "serialport": "^8.0.7",
+    "socket.io": "^2.1.1",
+    "tree-kill": "^1.2.2",
     "utf-8-validate": "^5.0.2",
-    "livecam": "^0.2.0"
+    "webcam-http-streaming": "^1.1.2"
   }
 }

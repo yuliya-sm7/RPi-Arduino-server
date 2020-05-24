@@ -12,6 +12,7 @@ socket.on('photo_count', function (c) {
 });
 
 let scaning = false;
+let photograph = null;
 photo_count.addEventListener('click', () => { window.location = '/gallery/' });
 const scan = document.getElementById('scan');
 scan.addEventListener('click', () => {
@@ -19,26 +20,29 @@ scan.addEventListener('click', () => {
   scan.classList.toggle('btn-primary');
   if (scaning) {
     scan.innerText = "Начать сканирование";
+    clearInterval(photograph)
   } else {
     scan.innerText = "Закончить сканирование";
-    photo_count.innerHTML = 0;
+    photograph = setInterval(() => {socket.emit('photo', video.src.substring(22))}, 1000);
   }
   scaning = !scaning;
   socket.emit("scanning", scaning);
 });
-
 
 let live = null;
 let video = document.getElementById("video");
 const camera = document.getElementById('customSwitch2');
 camera.addEventListener('click', (e) => {
   if (e.target.checked) {
-    live = io.connect('http://192.168.1.103:12000');
+    live = io.connect('http://5.187.41.138:12000');
     live.on('image', function (data) {
       video.src = "data:image/jpeg;base64," + data;
     });
+    video.alt = "Ошибка камеры!";
   } else {
     live.close();
+    video.src = "#";
+    video.alt = "Камера отключена!";
   }
   socket.emit("livecam", e.target.checked); //send button state to server
 });

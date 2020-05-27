@@ -1,7 +1,8 @@
 const express = require("express");
 const app = express();
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
 const SerialPort = require("serialport");
+
 
 // SERIAL
 const portName = '/dev/ttyACM0';
@@ -19,10 +20,12 @@ sp.on('open', function () {
     sp.write(s);
     console.log(s);
 });
+
+sp.on('data', msg => console.log(msg + ' from serial'))
 sp.on('close', function () { console.log("comm port close"); });
 
 //HTTP SERVER
-const port = 8080;
+const port = 3141;
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false })); 
 app.use(bodyParser.json())
@@ -33,7 +36,8 @@ app.post('/led', function (req, res) {
     res.send(turn?"ВКЛ":"ВЫКЛ")
 });
 app.post('/arduino', function (req, res) {
-    const command = req.body.input;
+    const command = req.body.command;
     console.log(command);
-    sp.write(command);
+    sp.write(command + '\n');
+    res.send(command + ' send to Arduino')
 });

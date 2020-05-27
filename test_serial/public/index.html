@@ -26,8 +26,11 @@
                     <input type="checkbox" class="custom-control-input" id="customSwitch3">
                     <label class="custom-control-label" for="customSwitch3">Подсветка</label>
                 </div>
-                <input type='text'>
-                <button type='button' id='SEND' class="btn btn-primary m-2">Отправить</button>
+                <form name='toArduino'>
+                    <input type='text' name='command'>
+                    <button type='submit' class=" btn btn-primary m-2">Отправить</button>
+                </form>
+                <textarea readonly id="info" rows='7' cols="30" placeholder='logging info'></textarea>
             </div>
             <div class='col'>
                 <div id="livecam"><img id="video" src="#" /></div>

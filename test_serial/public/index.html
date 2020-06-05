@@ -35,24 +35,50 @@
                     </div>
                 </form>
 
-                <svg viewBox="0 0 100 60" id='joystick'>
-                    <a xlink:href="#0">
-                        <circle id='forward' cx="30" cy="15" r="10" fill="GhostWhite" stroke="DarkGrey" />
-                    </a>
-                    <a xlink:href="#0">
-                        <circle id='left' cx="15" cy="30" r="10" fill="GhostWhite" stroke="DarkGrey" />
-                    </a>
-                    <a xlink:href="#0">
-                        <circle id='right' cx="45" cy="30" r="10" fill="GhostWhite" stroke="DarkGrey" />
-                    </a>
-                    <a xlink:href="#0">
-                        <circle id='backward' cx="30" cy="45" r="10" fill="GhostWhite" stroke="DarkGrey" />
-                    </a>
-                    <a xlink:href="#0">
-                        <circle id='stop' cx="30" cy="30" r="10" fill="GhostWhite" stroke="DarkOrange"
-                            stroke-width="3" />
-                    </a>
-                </svg>
+                <div class='row'>
+                    <div class='col'>
+                        <h4>Робот</h4>
+                        <svg viewBox="0 0 60 60" height='200' id='joystick'>
+                            <a xlink:href="#0">
+                                <circle id='forward' cx="30" cy="15" r="10" fill="GhostWhite" stroke="DarkGrey" />
+                            </a>
+                            <a xlink:href="#0">
+                                <circle id='left' cx="15" cy="30" r="10" fill="GhostWhite" stroke="DarkGrey" />
+                            </a>
+                            <a xlink:href="#0">
+                                <circle id='right' cx="45" cy="30" r="10" fill="GhostWhite" stroke="DarkGrey" />
+                            </a>
+                            <a xlink:href="#0">
+                                <circle id='backward' cx="30" cy="45" r="10" fill="GhostWhite" stroke="DarkGrey" />
+                            </a>
+                            <a xlink:href="#0">
+                                <circle id='stop' cx="30" cy="30" r="10" fill="GhostWhite" stroke="DarkOrange"
+                                    stroke-width="3" />
+                            </a>
+                        </svg>
+                    </div>
+                    <div class='col'>
+                        <h4>Камера</h4>
+                        <svg viewBox="0 0 60 60" height='200' id='joystick2'>
+                            <a xlink:href="#0">
+                                <circle id='stop' cx="30" cy="30" r="15" fill="GhostWhite" stroke="DarkOrange"
+                                    stroke-width="3" />
+                            </a>
+                            <a xlink:href="#0">
+                                <circle id='forward' cx="30" cy="15" r="10" fill="GhostWhite" stroke="DarkGrey" />
+                            </a>
+                            <a xlink:href="#0">
+                                <circle id='left' cx="15" cy="30" r="10" fill="GhostWhite" stroke="DarkGrey" />
+                            </a>
+                            <a xlink:href="#0">
+                                <circle id='right' cx="45" cy="30" r="10" fill="GhostWhite" stroke="DarkGrey" />
+                            </a>
+                            <a xlink:href="#0">
+                                <circle id='backward' cx="30" cy="45" r="10" fill="GhostWhite" stroke="DarkGrey" />
+                            </a>
+                        </svg>
+                    </div>
+                </div>
 
                 <textarea readonly id="info" class="form-control" rows='7' placeholder='logging info'></textarea>
             </div>

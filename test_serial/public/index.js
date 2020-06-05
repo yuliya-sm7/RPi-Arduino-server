@@ -67,6 +67,23 @@ document.getElementById('joystick').addEventListener('click', (e) => {
     };
 });
 
+document.getElementById('joystick2').addEventListener('click', (e) => {
+    switch (e.target.id) {
+        case 'forward':
+            sendCommand("cam:0");
+            break;
+        case 'left':
+            sendCommand("cam:90");
+            break;
+        case 'right':
+            sendCommand("cam:180");
+            break;
+        case 'backward':
+            sendCommand("cam:270");
+            break;
+    };
+});
+
 
 function sendCommand(str) {
     const data = { 'command': str };

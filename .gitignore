@@ -1,3 +1,5 @@
 node_modules/
 
+test_serial/node_modules/
+
 public/gallery/photo/

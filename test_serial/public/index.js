@@ -85,6 +85,21 @@ document.getElementById('joystick2').addEventListener('click', (e) => {
 });
 
 
+document.getElementById('time').oninput = function () {
+    this.labels[1].innerHTML = this.value;
+}
+document.getElementById('time').onchange = function () {
+    sendCommand("time:" + this.value);
+}
+
+document.getElementById('speed').oninput = function () {
+    this.labels[1].innerHTML = this.value;
+}
+document.getElementById('speed').onchange = function () {
+    sendCommand("speed:" + this.value);
+}
+
+
 function sendCommand(str) {
     const data = { 'command': str };
     fetch('/arduino', {

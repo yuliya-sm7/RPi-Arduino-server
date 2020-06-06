@@ -11,85 +11,103 @@
 
 <body>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-5">
-                <div class="custom-control custom-switch m-2">
-                    <input type="checkbox" class="custom-control-input" id="customSwitch1" checked='true' disabled>
-                    <label class="custom-control-label" for="customSwitch1">Arduino</label>
-                </div>
-                <div class="custom-control custom-switch m-2">
-                    <input type="checkbox" class="custom-control-input" id="customSwitch2" checked='true'>
-                    <label class="custom-control-label" for="customSwitch2">Камера</label>
-                </div>
-                <div class="custom-control custom-switch m-2">
-                    <input type="checkbox" class="custom-control-input" id="customSwitch3">
-                    <label class="custom-control-label" for="customSwitch3">Подсветка</label>
-                </div>
-                <form name='toArduino'>
-                    <div class="input-group mb-3">
-                        <input type="text" name='command' class="form-control" placeholder="command to robot">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="submit">Отправить</button>
-                        </div>
-                    </div>
-                </form>
-
-                <div class='row'>
-                    <div class='col'>
-                        <h4>Робот</h4>
-                        <svg viewBox="0 0 60 60" height='200' id='joystick'>
-                            <a xlink:href="#0">
-                                <circle id='forward' cx="30" cy="15" r="10" fill="GhostWhite" stroke="DarkGrey" />
-                            </a>
-                            <a xlink:href="#0">
-                                <circle id='left' cx="15" cy="30" r="10" fill="GhostWhite" stroke="DarkGrey" />
-                            </a>
-                            <a xlink:href="#0">
-                                <circle id='right' cx="45" cy="30" r="10" fill="GhostWhite" stroke="DarkGrey" />
-                            </a>
-                            <a xlink:href="#0">
-                                <circle id='backward' cx="30" cy="45" r="10" fill="GhostWhite" stroke="DarkGrey" />
-                            </a>
-                            <a xlink:href="#0">
-                                <circle id='stop' cx="30" cy="30" r="10" fill="GhostWhite" stroke="DarkOrange"
-                                    stroke-width="3" />
-                            </a>
-                        </svg>
-                    </div>
-                    <div class='col'>
-                        <h4>Камера</h4>
-                        <svg viewBox="0 0 60 60" height='200' id='joystick2'>
-                            <a xlink:href="#0">
-                                <circle id='stop' cx="30" cy="30" r="15" fill="GhostWhite" stroke="DarkOrange"
-                                    stroke-width="3" />
-                            </a>
-                            <a xlink:href="#0">
-                                <circle id='forward' cx="30" cy="15" r="10" fill="GhostWhite" stroke="DarkGrey" />
-                            </a>
-                            <a xlink:href="#0">
-                                <circle id='left' cx="15" cy="30" r="10" fill="GhostWhite" stroke="DarkGrey" />
-                            </a>
-                            <a xlink:href="#0">
-                                <circle id='right' cx="45" cy="30" r="10" fill="GhostWhite" stroke="DarkGrey" />
-                            </a>
-                            <a xlink:href="#0">
-                                <circle id='backward' cx="30" cy="45" r="10" fill="GhostWhite" stroke="DarkGrey" />
-                            </a>
-                        </svg>
-                    </div>
-                </div>
-
-                <textarea readonly id="info" class="form-control" rows='7' placeholder='logging info'></textarea>
+    <!-- <div class="container"> -->
+    <div class="row m-3">
+        <div class="col">
+            <div class="custom-control custom-switch m-2">
+                <input type="checkbox" class="custom-control-input" id="customSwitch1" checked='true' disabled>
+                <label class="custom-control-label" for="customSwitch1">Serial port</label>
             </div>
-            <div class='col'>
-                <div id="livecam" class='m-3'><img id="video" src="http://37.110.86.243:8081/" alt="Ошибка камеры"
-                        width="100%" /></div>
+            <div class="custom-control custom-switch m-2">
+                <input type="checkbox" class="custom-control-input" id="customSwitch2" checked='true'>
+                <label class="custom-control-label" for="customSwitch2">Камера</label>
+            </div>
+            <div class="custom-control custom-switch m-2">
+                <input type="checkbox" class="custom-control-input" id="customSwitch3">
+                <label class="custom-control-label" for="customSwitch3">Подсветка</label>
+            </div>
+            <form name='toArduino'>
+                <div class="input-group mb-3">
+                    <input type="text" name='command' class="form-control" placeholder="command to robot">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="submit">Отправить</button>
+                    </div>
+                </div>
+            </form>
+
+            <div class='row'>
+                <div class='col'>
+                    <h5>Робот</h5>
+                    <svg viewBox="0 0 60 60" height='150' id='joystick'>
+                        <a xlink:href="#0">
+                            <circle id='forward' cx="30" cy="15" r="10" fill="GhostWhite" stroke="DarkGrey" />
+                        </a>
+                        <a xlink:href="#0">
+                            <circle id='left' cx="15" cy="30" r="10" fill="GhostWhite" stroke="DarkGrey" />
+                        </a>
+                        <a xlink:href="#0">
+                            <circle id='right' cx="45" cy="30" r="10" fill="GhostWhite" stroke="DarkGrey" />
+                        </a>
+                        <a xlink:href="#0">
+                            <circle id='backward' cx="30" cy="45" r="10" fill="GhostWhite" stroke="DarkGrey" />
+                        </a>
+                        <a xlink:href="#0">
+                            <circle id='stop' cx="30" cy="30" r="10" fill="GhostWhite" stroke="DarkOrange"
+                                stroke-width="3" />
+                        </a>
+                    </svg>
+                </div>
+                <div class='col'>
+                    <h5>Камера</h5>
+                    <svg viewBox="0 0 60 60" height='150' id='joystick2'>
+                        <a xlink:href="#0">
+                            <circle id='stop' cx="30" cy="30" r="15" fill="GhostWhite" stroke="DarkOrange"
+                                stroke-width="3" />
+                        </a>
+                        <a xlink:href="#0">
+                            <circle id='forward' cx="30" cy="15" r="10" fill="GhostWhite" stroke="DarkGrey" />
+                        </a>
+                        <a xlink:href="#0">
+                            <circle id='left' cx="15" cy="30" r="10" fill="GhostWhite" stroke="DarkGrey" />
+                        </a>
+                        <a xlink:href="#0">
+                            <circle id='right' cx="45" cy="30" r="10" fill="GhostWhite" stroke="DarkGrey" />
+                        </a>
+                        <a xlink:href="#0">
+                            <circle id='backward' cx="30" cy="45" r="10" fill="GhostWhite" stroke="DarkGrey" />
+                        </a>
+                    </svg>
+                </div>
+                <div class='col'>
+                    <form><small>
+                            <div class="form-group">
+                                <label for="time">Время разгона</label>
+                                <label for="time">50</label>
+                                <label for="time">мс</label>
+                                <input type="range" class="form-control-range" id="time">
+                                </br>
+                            </div>
+                            <div class="form-group">
+                                <label for="speed">Max скорость</label>
+                                <label for="speed">50</label>
+                                <label for="speed">мм/с</label>
+                                <input type="range" class="form-control-range" id="speed">
+                                </br>
+                            </div>
+                        </small>
+                    </form>
+                </div>
+            </div>
+
+            <textarea readonly id="info" class="form-control" rows='7' placeholder='logging info'></textarea>
+        </div>
+        <div class='col'>
+            <div id="livecam" class='m-2'>
+                <img id="video" src="http://37.110.86.243:8081/" alt="Ошибка камеры" width="100%" />
             </div>
         </div>
     </div>
-
-
+    <!-- </div> -->
 
 
     <footer class="page-footer fixed-bottom bg-dark text-light">

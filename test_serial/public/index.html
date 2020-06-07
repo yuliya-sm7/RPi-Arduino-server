@@ -40,27 +40,6 @@
                     <h5>Робот</h5>
                     <svg viewBox="0 0 60 60" height='150' id='joystick'>
                         <a xlink:href="#0">
-                            <circle id='forward' cx="30" cy="15" r="10" fill="GhostWhite" stroke="DarkGrey" />
-                        </a>
-                        <a xlink:href="#0">
-                            <circle id='left' cx="15" cy="30" r="10" fill="GhostWhite" stroke="DarkGrey" />
-                        </a>
-                        <a xlink:href="#0">
-                            <circle id='right' cx="45" cy="30" r="10" fill="GhostWhite" stroke="DarkGrey" />
-                        </a>
-                        <a xlink:href="#0">
-                            <circle id='backward' cx="30" cy="45" r="10" fill="GhostWhite" stroke="DarkGrey" />
-                        </a>
-                        <a xlink:href="#0">
-                            <circle id='stop' cx="30" cy="30" r="10" fill="GhostWhite" stroke="DarkOrange"
-                                stroke-width="3" />
-                        </a>
-                    </svg>
-                </div>
-                <div class='col'>
-                    <h5>Камера</h5>
-                    <svg viewBox="0 0 60 60" height='150' id='joystick2'>
-                        <a xlink:href="#0">
                             <circle id='stop' cx="30" cy="30" r="15" fill="GhostWhite" stroke="DarkOrange"
                                 stroke-width="3" />
                         </a>
@@ -76,6 +55,20 @@
                         <a xlink:href="#0">
                             <circle id='backward' cx="30" cy="45" r="10" fill="GhostWhite" stroke="DarkGrey" />
                         </a>
+                    </svg>
+                </div>
+                <div class='col'>
+                    <h5>Камера</h5>
+                    <svg viewBox="0 0 60 60" height='150' id='joystick2'>
+                        <a xlink:href="#0">
+                            <circle id='round' cx="30" cy="30" r="25" fill="GhostWhite" stroke="DarkOrange"
+                                stroke-width="5" />
+                        </a>
+                        <a xlink:href="#0">
+                            <circle id='angle_point' cx="55" cy="30" r="5" fill="DarkSlateGrey" />
+                        </a>
+                        <text x="30" y="35" text-anchor="middle" font-size="smaller" fill="DarkSlateGrey"
+                            id='angle_val'>0</text>
                     </svg>
                 </div>
                 <div class='col'>
@@ -105,6 +98,29 @@
             <div id="livecam" class='m-2'>
                 <img id="video" src="http://37.110.86.243:8081/" alt="Ошибка камеры" width="100%" />
             </div>
+            <svg viewBox="0 0 300 80" xmlns="http://www.w3.org/2000/svg">
+                <style>
+                    .small {
+                        font: italic 13px sans-serif;
+                    }
+
+                    .heavy {
+                        font: bold 30px sans-serif;
+                    }
+
+                    /* Обратите внимание, что цвет текста задается с помощью        *
+                   * fill свойства, а свойство color используется только для HTML */
+                    .Rrrrr {
+                        font: italic 40px serif;
+                        fill: red;
+                    }
+                </style>
+
+                <text x="20" y="35" class="small">Мой</text>
+                <text x="60" y="35" class="heavy">кот</text>
+                <text x="60" y="55" class="small">очень</text>
+                <text x="100" y="55" class="Rrrrr">Сердит!</text>
+            </svg>
         </div>
     </div>
     <!-- </div> -->

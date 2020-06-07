@@ -67,21 +67,18 @@ document.getElementById('joystick').addEventListener('click', (e) => {
     };
 });
 
-document.getElementById('joystick2').addEventListener('click', (e) => {
-    switch (e.target.id) {
-        case 'forward':
-            sendCommand("cam:0");
-            break;
-        case 'left':
-            sendCommand("cam:90");
-            break;
-        case 'right':
-            sendCommand("cam:180");
-            break;
-        case 'backward':
-            sendCommand("cam:270");
-            break;
-    };
+document.getElementById('joystick2').addEventListener('click', (evt) => {
+    const dim = evt.target.getBoundingClientRect();
+    const R = 25;
+    const x = evt.clientX - dim.left - 45;
+    const y = evt.clientY - dim.top - 45;
+    let val = Math.atan2(y, x);
+    const point = document.getElementById('angle_point');
+    point.setAttribute('cx', R * Math.cos(val) + 30);
+    point.setAttribute('cy', R * Math.sin(val) + 30);
+    val = Math.round(val * 180 / Math.PI);
+    sendCommand("cam:" + val);
+    document.getElementById('angle_val').textContent = val;
 });
 
 

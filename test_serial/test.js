@@ -54,32 +54,7 @@ app.post('/arduino', function (req, res) {
         const val = command.split(':')[1];
         let buffer = Buffer.alloc(5);
         buffer[0] = 'p'.charCodeAt(0);
-        switch (val) {
-            case '0':
-                buffer[1] = 0;
-                buffer[2] = 0;
-                buffer[3] = 0;
-                buffer[4] = 0;
-                break;
-            case '90':
-                buffer[1] = 0;
-                buffer[2] = 0;
-                buffer[3] = 180;
-                buffer[4] = 66;
-                break;
-            case '180':
-                buffer[1] = 0;
-                buffer[2] = 0;
-                buffer[3] = 52;
-                buffer[4] = 67;
-                break;
-            case '270':
-                buffer[1] = 0;
-                buffer[2] = 0;
-                buffer[3] = 135;
-                buffer[4] = 67;
-                break;
-        }
+        buffer.writeFloatLE(val,1);
         buffer = cobs.encode(buffer, true);
         buffer = buffer.slice(1);
         sp.write(buffer);

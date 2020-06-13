@@ -69,6 +69,16 @@ app.post('/serial', function (req, res) {
         sp.write(buffer);
         res.send(Uint8Array.from(buffer) + ' send to Cam');
     }
+    else if (command.indexOf('smooth_speed') != -1) {
+        const val = command.split(':')[1];
+        let buffer = Buffer.alloc(5);
+        buffer[0] = 'V'.charCodeAt(0);
+        buffer.writeFloatLE(val,1);
+        buffer = cobs.encode(buffer, true);
+        buffer = buffer.slice(1);
+        sp.write(buffer);
+        res.send(Uint8Array.from(buffer) + ' send to Cam');
+    }
 
     else {
 //        sp.write(command);

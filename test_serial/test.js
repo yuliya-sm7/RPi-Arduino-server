@@ -24,7 +24,7 @@ const sp = new SerialPort(portName, {
 sp.on('error', err => console.log(err.message))
 sp.on('open', () => {
     console.log("COM port ready")
-    sp.write("TestMode On\n")
+//    sp.write("TestMode On\n")
 });
 //sp.on('data', msg => console.log("From serial: " + msg))
 sp.on('close', () => console.log("COM port close"));
@@ -40,15 +40,14 @@ app.listen(port);
 app.post('/led', function (req, res) {
     const turn = req.body.led;
     gpiop.write(37, turn);
-    gpiop.write(40, turn);
     res.send(turn ? "ВКЛ" : "ВЫКЛ")
 });
 app.post('/init', function (req, res) {
-    const init = req.body.serial;
-    init ? sp.open() : sp.close();
-    res.send("Serial is " + (init ? "open" : "close"))
+    const serial = req.body.serial;
+    serial ? sp.open() : sp.close();
+    res.send("Serial is " + (serial ? "open" : "close"))
 });
-app.post('/arduino', function (req, res) {
+app.post('/serial', function (req, res) {
     const command = req.body.command;
     if (command.indexOf('cam') != -1) {
         const val = command.split(':')[1];
@@ -60,8 +59,20 @@ app.post('/arduino', function (req, res) {
         sp.write(buffer);
         res.send(Uint8Array.from(buffer) + ' send to Cam');
     }
+    else if (command.indexOf('speed') != -1) {
+        const val = command.split(':')[1];
+        let buffer = Buffer.alloc(5);
+        buffer[0] = 'v'.charCodeAt(0);
+        buffer.writeFloatLE(val,1);
+        buffer = cobs.encode(buffer, true);
+        buffer = buffer.slice(1);
+        sp.write(buffer);
+        res.send(Uint8Array.from(buffer) + ' send to Cam');
+    }
+
     else {
-        sp.write(command);
-        res.send(command + ' send to Robot')
+//        sp.write(command);
+//        res.send(command + ' send to Robot')
+          res.send('command not found');
     }
 });

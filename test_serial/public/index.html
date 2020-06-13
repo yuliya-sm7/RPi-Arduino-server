@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Raspberry-Arduino</title>
+    <title>Raspberry-BLDC</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
@@ -71,24 +71,23 @@
                             id='angle_val'>0</text>
                     </svg>
                 </div>
-                <div class='col'>
-                    <form><small>
+                <div class='col'><small>
+                        <form>
                             <div class="form-group">
                                 <label for="time">Время разгона</label>
                                 <label for="time">50</label>
                                 <label for="time">мс</label>
                                 <input type="range" class="form-control-range" id="time">
-                                </br>
                             </div>
                             <div class="form-group">
                                 <label for="speed">Max скорость</label>
                                 <label for="speed">50</label>
                                 <label for="speed">мм/с</label>
                                 <input type="range" class="form-control-range" id="speed">
-                                </br>
                             </div>
-                        </small>
-                    </form>
+                        </form>
+                        <p cl>нажми W, чтобы идти налево, нажми S - чтобы идти направо</p>
+                    </small>
                 </div>
             </div>
 

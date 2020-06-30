@@ -69,6 +69,19 @@ app.post('/serial', function (req, res) {
         sp.write(buffer);
         res.send(Uint8Array.from(buffer) + ' send to Cam');
     }
+    else if (command.indexOf('RUN') != -1) {
+        const val = command.split(':')[1];
+	const speed = val.split(',')[0];
+	const angle = val.split(',')[1];
+        let buffer = Buffer.alloc(9);
+        buffer[0] = 'v'.charCodeAt(0);
+        buffer.writeFloatLE(speed,1);
+	buffer.writeFloatLE(angle,5);
+        buffer = cobs.encode(buffer, true);
+        buffer = buffer.slice(1);
+        sp.write(buffer);
+        res.send(Uint8Array.from(buffer) + ' send to Telega');
+    }
     else if (command.indexOf('smooth_speed') != -1) {
         const val = command.split(':')[1];
         let buffer = Buffer.alloc(5);

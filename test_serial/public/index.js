@@ -26,7 +26,7 @@ let video = document.getElementById("video");
 const camera = document.getElementById('customSwitch2');
 camera.addEventListener('click', (e) => {
     if (e.target.checked) {
-        video.src = "http://37.110.86.243:8081/";
+        video.src = "http://37.110.86.243:8085/";
         video.alt = "Ошибка камеры!";
     } else {
         video.src = "#";
